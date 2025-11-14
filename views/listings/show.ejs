@@ -1,35 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout("/layouts/boilerplate.ejs") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <body>
+        <h2>Listigns Details:</h2>
+        <ul>
+            <li>
+                <%=list.title %>
+            </li>
+            <li>
+                <%=list.description %>
+            </li>
+            <li>&#8377 <%=list.price.toLocaleString("en-IN") %></li>
+            <li>
+                <%=list.location %>
+            </li>
+            <li>
+                <%=list.country %>
+            </li>
+        </ul>
+        <br><br>
+        <a href="/listing/<%= list._id %>/edit">Edit This listing</a>
+        <form method="POST" action="/listing/<%=list._id %>/delete?_method=DELETE">
+            <button>Delete</button>
+        </form>
 
-<body>
-    <h2>Listigns Details:</h2>
-    <ul>
-        <li>
-            <%=list.title %>
-        </li>
-        <li>
-            <%=list.description %>
-        </li>
-        <li>&#8377 <%=list.price.toLocaleString("en-IN") %></li>
-        <li>
-            <%=list.location %>
-        </li>
-        <li>
-            <%=list.country %>
-        </li>
-    </ul>
-    <br><br>
-    <a href="/listing/<%= list._id %>/edit">Edit This listing</a>
-    <form method="POST" action="/listing/<%=list._id %>/delete?_method=DELETE">
-        <button>Delete</button>
-    </form>
-
-</body>
-
-</html>
+    </body>

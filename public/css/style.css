@@ -1,0 +1,17 @@
+.navbar {
+    height: 4rem;
+}
+
+.fa-compass {
+    font-size: 32px;
+    color: #fe424d;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.nav-link:hover {
+    color: black;
+    font-weight: 500;
+}
