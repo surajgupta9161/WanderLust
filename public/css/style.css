@@ -15,3 +15,48 @@
     color: black;
     font-weight: 500;
 }
+
+.footer {
+    height: 6rem;
+    background-color: rgb(187, 207, 187);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.f-social i {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.f-company {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.f-social-links a {
+    text-decoration: none;
+    color: black;
+    margin-right: 5px;
+}
+
+.f-social-links a:hover {
+    text-decoration: underline;
+}
+
+/* listings */
+.card-container {
+    display: flex !important;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card img {
+    height: 18rem;
+    object-fit: cover;
+}
