@@ -1,3 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
 .navbar {
     height: 4rem;
 }
@@ -24,6 +34,7 @@
     align-items: center;
     flex-direction: column;
     gap: 5px;
+    margin-top: 10px;
 }
 
 .f-social i {
@@ -56,7 +67,43 @@
     gap: 30px;
 }
 
+.card-container a {
+    text-decoration: none;
+}
+
+.card-style:hover {
+    background-color: rgb(213, 196, 196);
+    /* cursor: pointer; */
+}
+
 .card img {
     height: 18rem;
     object-fit: cover;
+}
+
+.card-body {
+    margin: 0 !important;
+    padding: 5px !important;
+}
+
+/* show ppage */
+
+.show-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.show-card {
+    border: none !important;
+    max-width: 40rem;
+}
+
+.show-img {
+    border-radius: 15px !important;
+}
+
+.show-btn {
+    display: flex;
+    gap: 20px;
 }
