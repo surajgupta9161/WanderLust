@@ -4,15 +4,28 @@
         <div class="row mt-3">
             <div class="col-8 offset-2">
                 <h2>Create New Listing</h2>
-                <form method="POST" action="/listings">
+                <form method="POST" action="/listings" novalidate class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" placeholder="enter title" name="list[title]" id="title" class="form-control">
+                        <input type="text" placeholder="enter title" name="list[title]" id="title" class="form-control"
+                            required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter valid Title.
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea name="list[description]" placeholder="enter description" rows="5" cols="20"
-                            id="description" class="form-control"></textarea>
+                            id="description" class="form-control" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter Valid Description.
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Enter Image URL/Link</label>
@@ -24,12 +37,24 @@
                         <div class="col-4 mb-3">
                             <label for="price" class="form-label">Price</label>
                             <input type="number" placeholder="enter price" name="list[price]" id="price"
-                                class="form-control">
+                                class="form-control" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter valid Price.
+                            </div>
                         </div>
                         <div class="col-8 mb-3">
                             <label for="country" class="form-label">Country</label>
                             <input type="text" placeholder="enter country" name="list[country]" class="form-control"
-                                id="country">
+                                id="country" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter Country.
+                            </div>
                         </div>
 
                     </div>
@@ -37,10 +62,16 @@
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
                         <input type="text" placeholder="enter location" name="list[location]" class="form-control"
-                            id="location">
+                            id="location" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter valid Location.
+                        </div>
                     </div>
 
-                    <button class="btn btn-outline-success">Success</button>
+                    <button class="btn btn-outline-success">Add Listing</button>
 
                 </form>
             </div>
