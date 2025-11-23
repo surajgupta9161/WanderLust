@@ -67,6 +67,10 @@ body {
     gap: 30px;
 }
 
+.allListing {
+    margin: 15px 0 15px 0;
+}
+
 .card-container a {
     text-decoration: none;
 }
