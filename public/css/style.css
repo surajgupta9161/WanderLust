@@ -43,6 +43,11 @@ body {
     cursor: pointer;
 }
 
+.f-social a {
+    text-decoration: none !important;
+    color: black;
+}
+
 .f-company {
     font-size: 15px;
     font-weight: 500;
