@@ -7,8 +7,8 @@
                 <form method="POST" action="/listings" novalidate class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" placeholder="enter title" name="list[title]" id="title" class="form-control"
-                            required>
+                        <input type="text" placeholder="enter title" name="listing[title]" id="title"
+                            class="form-control" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="list[description]" placeholder="enter description" rows="5" cols="20"
+                        <textarea name="listing[description]" placeholder="enter description" rows="5" cols="20"
                             id="description" class="form-control" required></textarea>
                         <div class="valid-feedback">
                             Looks good!
@@ -29,14 +29,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Enter Image URL/Link</label>
-                        <input type="text" placeholder="enter image url" name="list[image]" id="image"
+                        <input type="text" placeholder="enter image url" name="listing[image]" id="image"
                             class="form-control">
                     </div>
 
                     <div class="row">
                         <div class="col-4 mb-3">
                             <label for="price" class="form-label">Price</label>
-                            <input type="text" placeholder="enter price" name="list[price]" id="price"
+                            <input type="text" placeholder="enter price" name="listing[price]" id="price"
                                 class="form-control" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-8 mb-3">
                             <label for="country" class="form-label">Country</label>
-                            <input type="text" placeholder="enter country" name="list[country]" class="form-control"
+                            <input type="text" placeholder="enter country" name="listing[country]" class="form-control"
                                 id="country" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -61,7 +61,7 @@
 
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" placeholder="enter location" name="list[location]" class="form-control"
+                        <input type="text" placeholder="enter location" name="listing[location]" class="form-control"
                             id="location" required>
                         <div class="valid-feedback">
                             Looks good!
