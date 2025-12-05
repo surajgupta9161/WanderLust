@@ -35,7 +35,13 @@ const listingSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: 3
-    }
+    },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
 
 });
 
