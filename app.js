@@ -9,6 +9,7 @@ const wrapAsync = require("./utils/wrapAsync.js")
 const ExpressError = require("./utils/ExpressError.js")
 const { listingSchema } = require("./joischema.js");
 const { SlowBuffer } = require("buffer");
+const Review = require("./models/review.js");
 
 app.listen(8080, () => {
     console.log("Listing By Port 8080");
@@ -77,7 +78,7 @@ app.get("/listing/:id/edit", wrapAsync(async (req, res) => {
 
 app.put("/listing/:id", validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
-    await listing.findByIdAndUpdate(id, { ...req.body.list });
+    await listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listings/${id}`);
 }))
 
@@ -94,12 +95,25 @@ app.delete("/listing/:id/delete", wrapAsync(async (req, res) => {
 //     res.status(status).send(message);
 // })
 
+//reviews
+//review route
+
+app.post("/listings/:id/review", async (req, res) => {
+    let revlisting = await listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+    revlisting.reviews.push(newReview)
+    await newReview.save();
+    await revlisting.save();
+    console.log("Review Added");
+    res.redirect(`/listings/${revlisting.id}`)
+})
+
 app.use((req, res) => {
     res.status(404).render("listings/error.ejs", message = "Page Not Found");
 })
 
 app.use((err, req, res, next) => {
-    let { status = 500, message = "Sothing went wrong" } = err;
+    let { status = 500, message = "Somthing went wrong" } = err;
     res.status(status).render("listings/error.ejs", { message });
 })
 

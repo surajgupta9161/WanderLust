@@ -8,7 +8,7 @@
                     class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" value="<%=editListing.title %>" name="list[title]" class="form-control"
+                        <input type="text" value="<%=editListing.title %>" name="listing[title]" class="form-control"
                             id="title" required>
                         <div class="valid-feedback">
                             Looks good!
@@ -20,7 +20,7 @@
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" rows="5" cols="20" class="form-control" id="description"
+                        <textarea name="listing[description]" rows="5" cols="20" class="form-control" id="description"
                             required><%=editListing.description %></textarea>
 
                         <div class="valid-feedback">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="image " class="form-label">Image URL/Link</label>
-                        <input type="text" value="<%=editListing.image %>" name="list[image]" class="form-control"
+                        <input type="text" value="<%=editListing.image %>" name="listing[image]" class="form-control"
                             id="image" required>
                         <div class="valid-feedback">
                             Looks good!
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="price" class="form-label">Price</label>
-                            <input type="number" value="<%=editListing.price %>" name="list[price]" id="price"
+                            <input type="number" value="<%=editListing.price %>" name="listing[price]" id="price"
                                 class="form-control" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-md-8 mb-3">
                             <label for="country" class="form-label">Country</label>
-                            <input type="text" value="<%=editListing.country %>" name="list[country]"
+                            <input type="text" value="<%=editListing.country %>" name="listing[country]"
                                 class="form-control" id="country" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -67,8 +67,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" value="<%=editListing.location%>" name="list[location]" class="form-control"
-                            id="location" required>
+                        <input type="text" value="<%=editListing.location%>" name="listing[location]"
+                            class="form-control" id="location" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
