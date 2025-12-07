@@ -1,9 +1,14 @@
-const { types } = require("joi")
+
 const mongoose = require("mongoose")
 const { Schema } = mongoose
 
 const reviewSchema = new Schema({
-    comment: String,
+    comment: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 2
+    },
     rating: {
         type: Number,
         min: 1,
