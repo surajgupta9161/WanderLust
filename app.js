@@ -117,6 +117,15 @@ app.post("/listings/:id/review", validateReview, wrapAsync(async (req, res) => {
     res.redirect(`/listings/${revlisting.id}`)
 }))
 
+//Delete Review Route
+app.delete("/listings/:id/review/:reviewId", wrapAsync(async (req, res) => {
+    let { id, reviewId } = req.params;
+    await listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+
+}))
+
 app.use((req, res) => {
     res.status(404).render("listings/error.ejs", message = "Page Not Found");
 })
