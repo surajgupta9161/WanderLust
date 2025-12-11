@@ -4,9 +4,6 @@ const { listingSchema } = require("../joischema.js");
 const wrapAsync = require("../utils/wrapAsync.js")
 const listing = require("../models/listings.js");
 
-
-
-
 const validateListing = (req, res, next) => {
     const { error } = listingSchema.validate(req.body);
     if (error) {
@@ -32,13 +29,19 @@ listingRoute.get("/new", (req, res) => {
 listingRoute.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let list = await listing.findById(id).populate("reviews");
-    res.render("listings/show.ejs", { list });
+    if (!list) {
+        req.flash("error", "Listing does not exist!")
+        res.redirect("/listings")
+    } else {
+        res.render("listings/show.ejs", { list });
+    }
 }));
 
 //Create route
 listingRoute.post("/", validateListing, wrapAsync(async (req, res, next) => {
     let newListing = new listing(req.body.listing);
     await newListing.save();
+    req.flash("success", "New listing added!")
     res.redirect("/listings");
 }));
 
@@ -46,12 +49,19 @@ listingRoute.post("/", validateListing, wrapAsync(async (req, res, next) => {
 listingRoute.get("/:id/edit", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let editListing = await listing.findById(id);
-    res.render("listings/edit.ejs", { editListing });
+    if (!editListing) {
+        req.flash("error", "Listing does not exist!")
+        res.redirect("/listings")
+    } else {
+        res.render("listings/edit.ejs", { editListing });
+    }
+
 }))
 
 listingRoute.put("/:id", validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
+    req.flash("success", "Listing Updated!")
     res.redirect(`/listings/${id}`);
 }))
 
@@ -60,6 +70,7 @@ listingRoute.put("/:id", validateListing, wrapAsync(async (req, res) => {
 listingRoute.delete("/:id/delete", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted!")
     res.redirect("/listings");
 }));
 
