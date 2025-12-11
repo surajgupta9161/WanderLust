@@ -6,8 +6,12 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const listingRoute = require("./routes/listing.js");
 const reviewRoute = require("./routes/review.js");
-const session = require("express-session")
-const flash = require("connect-flash")
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
+const userRoute = require("./routes/user.js")
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -22,13 +26,22 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        expries: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true
     }
 }
 app.use(session(sessionOptions))
 app.use(flash())
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 //create flash 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success")
@@ -36,8 +49,18 @@ app.use((req, res, next) => {
     next()
 })
 
+app.get("/demouser", async (req, res) => {
+    const fakeUser = new User({
+        email: "demo@email.com",
+        username: "suraj"
+    })
+    let userRegister = await User.register(fakeUser, "1234");
+    res.send(userRegister);
+})
+
 app.use("/listings", listingRoute)
 app.use("/listings/:id/review", reviewRoute)
+app.use("/", userRoute);
 
 app.get("/", (req, res) => {
     res.send("Home Route /");
