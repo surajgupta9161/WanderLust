@@ -50,15 +50,6 @@ app.use((req, res, next) => {
     next()
 })
 
-// app.get("/demouser", async (req, res) => {
-//     const fakeUser = new User({
-//         email: "demo@email.com",
-//         username: "suraj"
-//     })
-//     let userRegister = await User.register(fakeUser, "1234");
-//     res.send(userRegister);
-// })
-
 app.use("/listings", listingRoute)
 app.use("/listings/:id/review", reviewRoute)
 app.use("/", userRoute);
