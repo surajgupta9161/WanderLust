@@ -3,14 +3,16 @@
     <body>
         <div class="show-container mt-3">
             <div>
-                <h2>Listing Details</h2>
+                <b>
+                    <%=list.title %> <br>
+                </b>
                 <div class="card show-card">
                     <img src="<%=list.image %>" class="card-img-top show-img" alt="listing-image">
                     <div class="card-body">
                         <p class="card-text">
-                            <b>
-                                <%=list.title %> <br>
-                            </b>
+                            Own by:<i>
+                                <%=list.owner.username%>
+                            </i>
                         <p>
                             <%=list.description %>
                         </p>

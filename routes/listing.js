@@ -30,7 +30,7 @@ listingRoute.get("/new", isLoggedIn, (req, res) => {
 //show route
 listingRoute.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let list = await listing.findById(id).populate("reviews");
+    let list = await listing.findById(id).populate("reviews").populate("owner");
     if (!list) {
         req.flash("error", "Listing does not exist!")
         res.redirect("/listings")
@@ -42,6 +42,7 @@ listingRoute.get("/:id", wrapAsync(async (req, res) => {
 //Create route
 listingRoute.post("/", isLoggedIn, validateListing, wrapAsync(async (req, res, next) => {
     let newListing = new listing(req.body.listing);
+    newListing.owner = req.user._id;
     await newListing.save();
     req.flash("success", "New listing added!")
     res.redirect("/listings");

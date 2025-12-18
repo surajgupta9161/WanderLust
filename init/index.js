@@ -9,6 +9,7 @@ async function main() {
 
 let dbdata = async () => {
     await listing.deleteMany({});
+    intiData.data = intiData.data.map((obj) => ({ ...obj, owner: "693a675dfd630754d4fa71bb" }))
     await listing.insertMany(intiData.data);
     console.log("Data Saved")
 }
