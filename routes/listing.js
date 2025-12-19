@@ -4,7 +4,7 @@ const { listingSchema } = require("../joischema.js");
 const wrapAsync = require("../utils/wrapAsync.js")
 const listing = require("../models/listings.js");
 const passport = require("passport");
-const { isLoggedIn } = require("../middleware.js")
+const { isLoggedIn, isOwner } = require("../middleware.js")
 
 const validateListing = (req, res, next) => {
     const { error } = listingSchema.validate(req.body);
@@ -49,7 +49,7 @@ listingRoute.post("/", isLoggedIn, validateListing, wrapAsync(async (req, res, n
 }));
 
 //Edit route
-listingRoute.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
+listingRoute.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let editListing = await listing.findById(id);
     if (!editListing) {
@@ -61,7 +61,7 @@ listingRoute.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
 
 }))
 
-listingRoute.put("/:id", isLoggedIn, validateListing, wrapAsync(async (req, res) => {
+listingRoute.put("/:id", isLoggedIn, isOwner, validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
     req.flash("success", "Listing Updated!")
@@ -70,7 +70,7 @@ listingRoute.put("/:id", isLoggedIn, validateListing, wrapAsync(async (req, res)
 
 //delete route
 
-listingRoute.delete("/:id/delete", isLoggedIn, wrapAsync(async (req, res) => {
+listingRoute.delete("/:id/delete", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
     req.flash("success", "Listing Deleted!")
