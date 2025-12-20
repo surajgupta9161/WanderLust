@@ -35,30 +35,33 @@
         </div>
         <hr>
         <div class="show-container ">
-            <h2>Leave a Review</h2>
-            <form method="POST" action="/listings/<%=list._id%>/review" novalidate class="needs-validation">
-                <div class="mb-3">
-                    <label for="rating">Rating</label>
-                    <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
-                </div>
-                <div class="mb-3">
-                    <label for="comment" class="form-label">Comment</label>
-                    <textarea rows="5" cols="60" name="review[comment]" id="comment" class="form-control"
-                        required></textarea>
-                    <div class="invalid-feedback">
-                        Please Add some comment!
+            <% if(currUser) {%>
+                <h2>Leave a Review</h2>
+                <form method="POST" action="/listings/<%=list._id%>/review" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label for="rating">Rating</label>
+                        <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
                     </div>
-                </div>
-                <button class="btn btn-outline-dark">Submit</button>
-            </form>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comment</label>
+                        <textarea rows="5" cols="60" name="review[comment]" id="comment" class="form-control"
+                            required></textarea>
+                        <div class="invalid-feedback">
+                            Please Add some comment!
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-dark">Submit</button>
+                </form>
+                <% } %>
         </div>
-        <hr>
         <h4>All Reviews</h4>
         <div class="d-flex flex-wrap gap-3">
             <% for(let review of list.reviews){ %>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">User</h5>
+                        <p class="card-title">
+                            @<%= review.author.username %>
+                        </p>
                         <p class="card-text">
                             <%=review.comment %>
                         </p>
