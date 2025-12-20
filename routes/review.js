@@ -31,7 +31,7 @@ reviewRoute.post("/", isLoggedIn, validateReview, wrapAsync(async (req, res) => 
 }))
 
 //Delete Review Route
-reviewRoute.delete("/:reviewId", isReviewAuthor, wrapAsync(async (req, res) => {
+reviewRoute.delete("/:reviewId", isLoggedIn, isReviewAuthor, wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
     await listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
     await Review.findByIdAndDelete(reviewId);
