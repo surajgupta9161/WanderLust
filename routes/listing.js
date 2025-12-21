@@ -16,23 +16,15 @@ const validateListing = (req, res, next) => {
     }
 }
 
-//index route
-listingRoute.get("/", wrapAsync(listingController.indexRoute));
+listingRoute.route("/").get(wrapAsync(listingController.indexRoute)).post(isLoggedIn, validateListing, wrapAsync(listingController.saveListing));
 
 //New Route
 listingRoute.get("/new", isLoggedIn, listingController.newForm)
 
-//show route
-listingRoute.get("/:id", wrapAsync(listingController.showListing));
-
-//Create route
-listingRoute.post("/", isLoggedIn, validateListing, wrapAsync(listingController.saveListing));
+listingRoute.route("/:id").get(wrapAsync(listingController.showListing)).put(isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing))
 
 //Edit route
 listingRoute.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editForm))
-
-//Update Route
-listingRoute.put("/:id", isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing))
 
 //delete route
 listingRoute.delete("/:id/delete", isLoggedIn, isOwner, wrapAsync(listingController.destroy));
