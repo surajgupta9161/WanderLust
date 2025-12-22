@@ -5,6 +5,8 @@ const wrapAsync = require("../utils/wrapAsync.js")
 const passport = require("passport");
 const { isLoggedIn, isOwner } = require("../middleware.js")
 const listingController = require("../controllers/listings.js")
+const multer = require("multer")
+const upload = multer({ dest: 'uploads/' })
 
 const validateListing = (req, res, next) => {
     const { error } = listingSchema.validate(req.body);
@@ -16,7 +18,12 @@ const validateListing = (req, res, next) => {
     }
 }
 
-listingRoute.route("/").get(wrapAsync(listingController.indexRoute)).post(isLoggedIn, validateListing, wrapAsync(listingController.saveListing));
+listingRoute.route("/")
+    .get(wrapAsync(listingController.indexRoute))
+    // .post(isLoggedIn, validateListing, wrapAsync(listingController.saveListing));
+    .post(upload.single('listing[image]'), (req, res) => {
+        res.send(req.file);
+    })
 
 //New Route
 listingRoute.get("/new", isLoggedIn, listingController.newForm)
