@@ -14,4 +14,4 @@ let dbdata = async () => {
     console.log("Data Saved")
 }
 
-// dbdata();
+dbdata();
