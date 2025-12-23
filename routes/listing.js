@@ -6,7 +6,8 @@ const passport = require("passport");
 const { isLoggedIn, isOwner } = require("../middleware.js")
 const listingController = require("../controllers/listings.js")
 const multer = require("multer")
-const upload = multer({ dest: 'uploads/' })
+const { storage } = require("../cloudConfig.js")
+const upload = multer({ storage })
 
 const validateListing = (req, res, next) => {
     const { error } = listingSchema.validate(req.body);
