@@ -29,7 +29,7 @@ listingRoute.route("/")
 //New Route
 listingRoute.get("/new", isLoggedIn, listingController.newForm)
 
-listingRoute.route("/:id").get(wrapAsync(listingController.showListing)).put(isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing))
+listingRoute.route("/:id").get(wrapAsync(listingController.showListing)).put(isLoggedIn, isOwner, upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing))
 
 //Edit route
 listingRoute.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editForm))
