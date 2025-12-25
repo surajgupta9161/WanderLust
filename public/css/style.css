@@ -28,7 +28,9 @@ body {
 
 .nav-btn {
     background-color: rgb(54, 137, 54) !important;
-    border-radius: 10px;
+    border-radius: 15px !important;
+    width: 5rem;
+    text-align: center;
     color: white !important;
 }
 
@@ -141,4 +143,53 @@ body {
     height: 150px;
     object-fit: cover;
 
+}
+
+/* serach bar  */
+.search-box {
+    width: 17rem !important;
+    border-radius: 20px !important;
+    padding-left: 3.5rem !important;
+}
+
+.search-btn {
+    width: 6rem !important;
+    border-radius: 20px !important;
+}
+
+/* filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter {
+    text-align: center;
+    margin-right: 3rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.checkbox {
+    margin-right: 5rem;
+    border: 2px solid rgb(77, 69, 69);
+    height: 3rem;
+    padding: 0.6rem 1rem 0.6rem 1rem;
+    border-radius: 15px;
+}
+
+.gst {
+    display: none;
 }

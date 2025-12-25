@@ -17,3 +17,16 @@
         }, false)
     })
 })()
+
+//Toogle button 
+let taxSwitch = document.getElementById("switchCheckDefault")
+taxSwitch.addEventListener("click", () => {
+    let gstClasses = document.getElementsByClassName("gst")
+    for (gstClass of gstClasses) {
+        if (gstClass.style.display != "inline") {
+            gstClass.style.display = "inline"
+        } else {
+            gstClass.style.display = "none"
+        }
+    }
+})
