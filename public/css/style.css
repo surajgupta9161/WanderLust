@@ -26,6 +26,24 @@ body {
     font-weight: 500;
 }
 
+.nav-btn {
+    background-color: rgb(54, 137, 54) !important;
+    border-radius: 10px;
+    color: white !important;
+}
+
+.signup {
+    background-color: rgb(68, 68, 130) !important;
+}
+
+.logout {
+    background-color: red;
+}
+
+.navbar-nav {
+    gap: 5px;
+}
+
 .footer {
     height: 6rem;
     background-color: rgb(187, 207, 187);

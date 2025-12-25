@@ -58,9 +58,9 @@ app.use("/listings", listingRoute)
 app.use("/listings/:id/review", reviewRoute)
 app.use("/", userRoute);
 
-app.get("/", (req, res) => {
-    res.send("Home Route /");
-})
+// app.get("/", (req, res) => {
+//     res.send("Home Route /");
+// })
 
 app.use((req, res) => {
     res.status(404).render("listings/error.ejs", message = "Page Not Found");
