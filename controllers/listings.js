@@ -15,7 +15,7 @@ module.exports.showListing = async (req, res) => {
     let list = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" } }).populate("owner");
     if (!list) {
         req.flash("error", "Listing does not exist!")
-        res.redirect("/listings")
+        return res.redirect("/listings")
     } else {
         res.render("listings/show.ejs", { list });
     }
@@ -29,7 +29,7 @@ module.exports.saveListing = async (req, res, next) => {
     newListing.image = { url, filename };
     await newListing.save();
     req.flash("success", "New listing added!")
-    res.redirect("/listings");
+    return res.redirect("/listings");
 }
 
 module.exports.editForm = async (req, res) => {
@@ -37,7 +37,7 @@ module.exports.editForm = async (req, res) => {
     let editListing = await Listing.findById(id);
     if (!editListing) {
         req.flash("error", "Listing does not exist!")
-        res.redirect("/listings")
+        return res.redirect("/listings")
     } else {
         // let originalImageUrl = editListing.image.url;
         // originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_50,w_50")
@@ -55,12 +55,12 @@ module.exports.updateListing = async (req, res) => {
         await updatedListing.save()
     }
     req.flash("success", "Listing Updated!")
-    res.redirect(`/listings/${id}`);
+    return res.redirect(`/listings/${id}`);
 }
 
 module.exports.destroy = async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("success", "Listing Deleted!")
-    res.redirect("/listings");
+    return res.redirect("/listings");
 }

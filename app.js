@@ -11,11 +11,13 @@ const ejsMate = require("ejs-mate");
 const listingRoute = require("./routes/listing.js");
 const reviewRoute = require("./routes/review.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-const userRoute = require("./routes/user.js")
+const userRoute = require("./routes/user.js");
+const { error } = require('console');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -25,7 +27,33 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")))
 
+app.listen(8080, () => {
+    console.log("Listing By Port 8080");
+})
+// let MONGOOSE_URL = "mongodb://127.0.0.1:27017/wanderlust";
+let dburl = process.env.ATLAS_DB;
+main().then(() => console.log("Connect to the DB")).catch(err => console.log(err));
+async function main() {
+    await mongoose.connect(dburl)
+}
+
+
+const store = MongoStore.create({
+    mongoUrl: dburl,
+    crypto: {
+        secret: "mysecretcode",
+    },
+    touchAfter: 24 * 3600,
+});
+
+console.log("DBURL =", dburl);
+
+store.on("error", (err) => {
+    console.log("Error in MONGO Session Store ", err)
+})
+
 const sessionOptions = {
+    // store: store,
     secret: "mysecretcode",
     resave: false,
     saveUninitialized: true,
@@ -35,6 +63,9 @@ const sessionOptions = {
         httpOnly: true
     }
 }
+
+
+
 app.use(session(sessionOptions))
 app.use(flash())
 
@@ -62,20 +93,18 @@ app.use("/", userRoute);
 //     res.send("Home Route /");
 // })
 
+// app.use((req, res) => {
+//     res.status(404).render("listings/error.ejs", message = "Page Not Found");
+// })
+
 app.use((req, res) => {
-    res.status(404).render("listings/error.ejs", message = "Page Not Found");
-})
+    res.status(404).render("listings/error.ejs", {
+        message: "Page Not Found"
+    });
+});
 
 app.use((err, req, res, next) => {
     let { status = 500, message = "Somthing went wrong" } = err;
     res.status(status).render("listings/error.ejs", { message });
 })
 
-app.listen(8080, () => {
-    console.log("Listing By Port 8080");
-})
-let MONGOOSE_URL = "mongodb://127.0.0.1:27017/wanderlust";
-main().then(() => console.log("Connect to the DB")).catch(err => console.log(err));
-async function main() {
-    await mongoose.connect(MONGOOSE_URL)
-}
