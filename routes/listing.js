@@ -22,9 +22,7 @@ const validateListing = (req, res, next) => {
 listingRoute.route("/")
     .get(wrapAsync(listingController.indexRoute))
     .post(isLoggedIn, validateListing, upload.single('listing[image]'), wrapAsync(listingController.saveListing));
-// .post(upload.single('listing[image]'), (req, res) => {
-//     res.send(req.file);
-// })
+
 
 //New Route
 listingRoute.get("/new", isLoggedIn, listingController.newForm)

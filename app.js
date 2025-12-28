@@ -18,6 +18,8 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const userRoute = require("./routes/user.js");
 const { error } = require('console');
+const listingController = require("./controllers/listings.js")
+const wrapAsync = require("./utils/wrapAsync.js")
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -97,9 +99,7 @@ app.use("/listings", listingRoute)
 app.use("/listings/:id/review", reviewRoute)
 app.use("/", userRoute);
 
-// app.get("/", (req, res) => {
-//     res.send("Home Route /");
-// })
+app.get("/", wrapAsync(listingController.indexRoute))
 
 // app.use((req, res) => {
 //     res.status(404).render("listings/error.ejs", message = "Page Not Found");
