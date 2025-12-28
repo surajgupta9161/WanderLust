@@ -27,9 +27,17 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")))
 
-app.listen(8080, () => {
-    console.log("Listing By Port 8080");
-})
+// app.listen(8080, () => {
+//     console.log("Listing By Port 8080");
+// })
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+
 // let MONGOOSE_URL = "mongodb://127.0.0.1:27017/wanderlust";
 let dburl = process.env.ATLAS_DB;
 main().then(() => console.log("Connect to the DB")).catch(err => console.log(err));
