@@ -95,11 +95,81 @@ body {
 /* listings */
 .card-container {
     display: flex !important;
-    /* justify-content: center; */
-    /* align-items: center; */
     flex-wrap: wrap;
     gap: 30px;
 }
+
+.allcard {
+    width: 410px !important;
+}
+
+/* Base – Mobile First */
+.card-container {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1.5rem !important;
+}
+
+.allcard {
+    width: 100% !important;
+    max-width: 400px !important;
+    /* card size bada */
+    margin: auto !important;
+}
+
+/* Card image fix */
+.card-img-top {
+    height: 240px !important;
+    /* image height bada */
+    object-fit: cover !important;
+}
+
+/* Card body spacing */
+.card-body {
+    padding: 1.25rem !important;
+}
+
+/* Small Mobile (already 1 card) */
+
+/* Tablet */
+@media (min-width: 576px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .allcard {
+        max-width: 380px !important;
+    }
+}
+
+/* Laptop */
+@media (min-width: 992px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .allcard {
+        max-width: 400px !important;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .card-container {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .allcard {
+        max-width: 420px !important;
+        /* desktop pe aur bada */
+    }
+
+    .card-img-top {
+        height: 260px !important;
+    }
+}
+
 
 .allListing {
     margin: 15px 0 15px 0;
